@@ -1,0 +1,89 @@
+explore: sales_data {
+  view: sales_data {
+    measure: total_sales {
+      type: sum
+      sql: TransactionAmount ;
+    }
+    
+    measure: avg_order_value {
+      type: average
+      sql: TransactionAmount ;
+    }
+    
+    measure: total_transactions {
+      type: count_distinct
+      sql: TransactionID ;
+    }
+    
+    dimension: city {
+      type: string
+      sql: City ;
+    }
+    
+    measure: sales_by_city {
+      type: sum
+      sql: TransactionAmount ;
+      drill_fields: [city]
+    }
+    
+    dimension: store_type {
+      type: string
+      sql: StoreType ;
+    }
+    
+    measure: sales_by_store_type {
+      type: sum
+      sql: TransactionAmount ;
+      drill_fields: [store_type]
+    }
+    
+    dimension: payment_method {
+      type: string
+      sql: PaymentMethod ;
+    }
+    
+    measure: sales_by_payment_method {
+      type: sum
+      sql: TransactionAmount ;
+      drill_fields: [payment_method]
+    }
+    
+    dimension: customer_age {
+      type: number
+      sql: CustomerAge ;
+    }
+    
+    dimension: customer_gender {
+      type: string
+      sql: CustomerGender ;
+    }
+    
+    measure: total_customers {
+      type: count_distinct
+      sql: CustomerID ;
+      drill_fields: [customer_age, customer_gender]
+    }
+    
+    dimension: returned {
+      type: string
+      sql: Returned ;
+    }
+    
+    measure: return_rate_analysis {
+      type: count
+      sql: TransactionID ;
+      drill_fields: [returned]
+    }
+    
+    dimension: is_promotional {
+      type: string
+      sql: IsPromotional ;
+    }
+    
+    measure: promotional_sales_performance {
+      type: sum
+      sql: TransactionAmount ;
+      drill_fields: [is_promotional]
+    }
+  }
+}
