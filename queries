@@ -1,0 +1,62 @@
+1. Total Sales, Average Order Value, Total Transactions
+
+    SELECT 
+    SUM(TransactionAmount) AS total_sales,
+    AVG(TransactionAmount) AS avg_order_value,
+    COUNT(DISTINCT TransactionID) AS total_transactions
+FROM sales_data;
+
+2. Sales by City
+
+  SELECT 
+    City, 
+    SUM(TransactionAmount) AS total_sales
+FROM sales_data
+GROUP BY City
+ORDER BY total_sales DESC;
+
+3. Sales by Store Type (Online vs In-Store)
+
+    SELECT 
+    StoreType, 
+    SUM(TransactionAmount) AS total_sales
+FROM sales_data
+GROUP BY StoreType;
+
+4. Sales by Payment Method
+
+  SELECT 
+    PaymentMethod, 
+    SUM(TransactionAmount) AS total_sales
+FROM sales_data
+GROUP BY PaymentMethod
+ORDER BY total_sales DESC;
+
+5. Customer Segmentation (Age & Gender)
+
+  SELECT 
+    CustomerAge, 
+    CustomerGender, 
+    COUNT(DISTINCT CustomerID) AS total_customers,
+    SUM(TransactionAmount) AS total_sales
+FROM sales_data
+GROUP BY CustomerAge, CustomerGender
+ORDER BY total_sales DESC;
+
+6. Return Rate Analysis
+
+  SELECT 
+    Returned, 
+    COUNT(TransactionID) AS total_transactions,
+    SUM(TransactionAmount) AS total_sales
+FROM sales_data
+GROUP BY Returned;
+
+7. Promotional Sales Performance
+
+  SELECT 
+    IsPromotional, 
+    COUNT(TransactionID) AS total_transactions, 
+    SUM(TransactionAmount) AS total_sales
+FROM sales_data
+GROUP BY IsPromotional;
