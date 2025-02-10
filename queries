@@ -1,0 +1,9 @@
+SELECT 
+    City, 
+    StoreType, 
+    SUM(TransactionAmount) AS total_sales, 
+    AVG(TransactionAmount) AS avg_order_value, 
+    COUNT(TransactionID) AS total_transactions
+FROM sales_data
+GROUP BY City, StoreType
+ORDER BY total_sales DESC;
